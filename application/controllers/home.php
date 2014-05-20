@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 	 * - if this is a POST request, this will create
 	 *   a new todo item and redirect the user back to the list page
 	 *
-	 * - Otherwise, displays the 'new todo item' input
+	 * - Otherwise, displays the 'new todo item' input field
 	 *
 	 */
 	public function create()
@@ -58,6 +58,43 @@ class Home extends CI_Controller {
 		} else {
 			// otherwise load the create view
 			$this->load->view('create');
+		}
+	}
+
+	/**
+	 * Update Page for home controller.
+	 * - if this is a POST request, this will update
+	 *   a todo item and redirect the user back to the list page
+	 *
+	 * - Otherwise, displays the 'edit todo item' input field
+	 *
+	 */
+	public function edit()
+	{
+		// helpers
+		$this->load->helper('url');
+		// load the todo model
+		$this->load->model('Todo_model');
+
+		// get the post data (if any)
+		$todo_id = $this->input->post('todo_id');
+		$todo_text = $this->input->post('todo_text');
+		// check if we got valid post data
+		if (is_numeric($todo_id) && $todo_id > 0 && $todo_text){
+			// if so, update todo item in the db
+			// - make the udpate request
+			$todo_id = $this->Todo_model->update_todo($todo_id, $todo_text);
+
+			// redirect to the list page
+			redirect('home');
+
+		} else {
+			// otherwise load the update view
+			// - get the data to pass into the view
+			$todo_id = $this->input->get('todo_id');
+			$todo = $this->Todo_model->get_todo($todo_id);
+			// load the view
+			$this->load->view('update',$todo);
 		}
 	}
 
