@@ -72,11 +72,14 @@ class Todo_model extends CI_Model {
         if (!is_numeric($id)){
             return;
         }
+        // get the todo item (so we have the the other object properties)
+        $todo = $this->get_todo($id);
 
         // get the time
-        $this->dateCompleted = time();
+        $todo->dateCompleted = time();
+
         // set the date completed property in the db
-        $this->db->update('todos', $this, array('id' => $id));
+        $this->db->update('todos', $todo, array('id' => $id));
     }
 
     // removes a todo item

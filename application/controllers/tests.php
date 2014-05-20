@@ -38,7 +38,8 @@ class Tests extends CI_Controller {
 		// it should have the correct text property
 		echo $this->unit->run($todo->text == $original_todo_text, TRUE, $test_name.' - text');
 		// it should have the dateCreated property
-		echo $this->unit->run($todo->dateCreated > 0, TRUE, $test_name.' - date created');
+		$todo_date_created = $todo->dateCreated; 
+		echo $this->unit->run($todo_date_created > 0, TRUE, $test_name.' - date created');
 		// the dateCompleted property should be set to 0
 		echo $this->unit->run($todo->dateCompleted == 0, TRUE, $test_name.' - date completed');
 
@@ -56,8 +57,11 @@ class Tests extends CI_Controller {
 	
 		$this->Todo_model->complete_todo($todo_id);
 		$todo = $this->Todo_model->get_todo($todo_id);
-		// it should have the new text
+		// it should have a valid dateComplete timestamp
 		echo $this->unit->run($todo->dateCompleted > 0, TRUE, $test_name);
+		// the other properties should not have been altered
+		echo $this->unit->run($todo->text == $new_todo_text, TRUE, $test_name.' - text not altered');
+		echo $this->unit->run($todo->dateCreated == $todo_date_created, TRUE, $test_name.' - dateCreated not altered');
 
 		// -- test GET ALL todo items
 		$test_name = 'Get All Todo items test';
@@ -71,6 +75,7 @@ class Tests extends CI_Controller {
 		// it should have returned an array with more than one todo object
 		echo $this->unit->run(count($todos) > 1, TRUE, $test_name);
 		
+
 		// -- test REMOVE a todo item
 		$test_name = 'Remove Todo test';
 	

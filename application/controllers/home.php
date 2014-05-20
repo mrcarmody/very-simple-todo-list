@@ -62,7 +62,7 @@ class Home extends CI_Controller {
 	}
 
 	/**
-	 * Update Page for home controller.
+	 * Edit/Update Page for home controller.
 	 * - if this is a POST request, this will update
 	 *   a todo item and redirect the user back to the list page
 	 *
@@ -96,6 +96,56 @@ class Home extends CI_Controller {
 			// load the view
 			$this->load->view('update',$todo);
 		}
+	}
+
+	/**
+	 * Complete function for home controller.
+	 *
+	 */
+	public function complete()
+	{
+		// helpers
+		$this->load->helper('url');
+		// load the todo model
+		$this->load->model('Todo_model');
+
+		// get the post data
+		$todo_id = $this->input->post('todo_id');
+		// check if we got valid post data
+		if (is_numeric($todo_id) && $todo_id > 0){
+			// if so, mark the todo item as complete in the db
+			$this->Todo_model->complete_todo($todo_id);
+		} else {
+			// otherwise don't do anything...
+		}
+
+		// redirect to the list page
+		redirect('home');
+	}
+
+	/**
+	 * Delete function for home controller.
+	 *
+	 */
+	public function delete()
+	{
+		// helpers
+		$this->load->helper('url');
+		// load the todo model
+		$this->load->model('Todo_model');
+
+		// get the post data
+		$todo_id = $this->input->post('todo_id');
+		// check if we got valid post data
+		if (is_numeric($todo_id) && $todo_id > 0){
+			// if so, mark the todo item as complete in the db
+			$this->Todo_model->remove_todo($todo_id);
+		} else {
+			// otherwise don't do anything...
+		}
+
+		// redirect to the list page
+		redirect('home');
 	}
 
 

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>ToDo List - Update an Item</title>
+	<title>ToDo List - Edit an Item</title>
 </head>
 <body>
 
 <div id="container">
-	<h1>Update an Item:</h1>
+	<h1>Edit Item:</h1>
 
     <!-- <a href="/home">Back</a> -->
     

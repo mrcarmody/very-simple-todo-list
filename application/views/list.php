@@ -15,15 +15,21 @@
 		<h3>Items:</h3>
 		<ul>
 			<?php foreach ($todos as $key => $todo):?>
-				<li><?php echo $todo->text;?> 
-					<form action="home/edit" method="get">
+				<li><?php if ($todo->dateCompleted):?>
+						<del><?php echo $todo->text;?></del>
+					<?php else:?>
+						<?php echo $todo->text;?>
+						<form action="home/edit" method="get">
+								<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
+	    						<button type="submit">Edit</button>
+						</form>  
+						<form action="home/complete" method="post">
+								<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
+	    						<button type="submit">Complete</button>
+						</form>
+					<?php endif;?>
+					<form action="home/delete" method="post">
 							<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
-    						<button type="submit">Edit</button>
-					</form>  
-					<form action="home/complete?id=<?php echo $todo->id;?>">
-    						<button type="submit">Complete</button>
-					</form> 
-					<form action="home/delete?id=<?php echo $todo->id;?>">
     						<button type="submit">Delete</button>
 					</form>
 				</li>
