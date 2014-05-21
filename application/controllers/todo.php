@@ -3,7 +3,7 @@
 class Todo extends CI_Controller {
 
 	/**
-	 * Index Page for home controller.
+	 * Index Page for todo controller.
 	 *
 	 */
 	public function index()
@@ -23,7 +23,7 @@ class Todo extends CI_Controller {
 	}
 
 	/**
-	 * Create Page for home controller.
+	 * Create Page for todo controller.
 	 * - if this is a POST request, this will create
 	 *   a new todo item and redirect the user back to the list page
 	 *
@@ -49,7 +49,7 @@ class Todo extends CI_Controller {
 			// check that we got back a valid id
 			if (is_numeric($todo_id) && $todo_id > 0){
 				// if so, redirect to the list page
-				redirect('home');
+				redirect('todo');
 			} else {
 				// otherwise, display an error
 				echo "There was a problem.  Please go back and try again.";
@@ -62,7 +62,7 @@ class Todo extends CI_Controller {
 	}
 
 	/**
-	 * Edit/Update Page for home controller.
+	 * Edit/Update Page for todo controller.
 	 * - if this is a POST request, this will update
 	 *   a todo item and redirect the user back to the list page
 	 *
@@ -86,7 +86,7 @@ class Todo extends CI_Controller {
 			$todo_id = $this->Todo_model->update_todo($todo_id, $todo_text);
 
 			// redirect to the list page
-			redirect('home');
+			redirect('todo');
 
 		} else {
 			// otherwise load the update view
@@ -99,7 +99,7 @@ class Todo extends CI_Controller {
 	}
 
 	/**
-	 * Complete function for home controller.
+	 * Complete function for todo controller.
 	 *
 	 */
 	public function complete()
@@ -120,11 +120,11 @@ class Todo extends CI_Controller {
 		}
 
 		// redirect to the list page
-		redirect('home');
+		redirect('todo');
 	}
 
 	/**
-	 * Delete function for home controller.
+	 * Delete function for todo controller.
 	 *
 	 */
 	public function delete()
@@ -145,11 +145,11 @@ class Todo extends CI_Controller {
 		}
 
 		// redirect to the list page
-		redirect('home');
+		redirect('todo');
 	}
 
 
 }
 
-/* End of file home.php */
-/* Location: ./application/controllers/home.php */
+/* End of file todo.php */
+/* Location: ./application/controllers/todo.php */

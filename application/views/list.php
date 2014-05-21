@@ -12,7 +12,7 @@
 		<div class="col-xs-12">
 			<h1>ToDo List:</h1>
 
-			<a href="home/create"><button type="submit" class="btn btn-success btn-xs">Create New Item</button></a>
+			<a href="todo/create"><button type="submit" class="btn btn-success btn-xs">Create New Item</button></a>
 		</div>
 	</div>
 	<div id="body" class="row">
@@ -29,7 +29,7 @@
 					<?php if ($todo->dateCompleted):?>
 							<del><?php echo $todo->text;?></del>
 					<?php else:?>
-							<form action="home/complete" method="post">
+							<form action="todo/complete" method="post">
 									<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
 									<button type="submit" class="btn btn-success btn-xs" title="Complete"><span class="glyphicon glyphicon-ok"></span></button>
 							</form>
@@ -38,14 +38,14 @@
 							<?php echo $todo->text;?>
 					</div>
 					<div class="pull-left" style="padding:1px;">
-							<form action="home/edit" method="get">
+							<form action="todo/edit" method="get">
 									<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
 									<button type="submit" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
 							</form>  
 					<?php endif;?>
 					</div>
 					<div class="pull-left" style="padding:1px;">
-						<form action="home/delete" method="post">
+						<form action="todo/delete" method="post">
 								<input type="hidden" id="todo_id" name="todo_id" value="<?php echo $todo->id;?>" />
 	    						<button type="submit" class="btn btn-danger btn-xs"  title="Delete permanently"><span class="glyphicon glyphicon-trash"></span></button>
 						</form>
